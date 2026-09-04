@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val btnSearch = findViewById<Button>(R.id.btn_search)
+        val btnSearch = findViewById<Button>(R.id.btnSearch)
         val btnSearchOnClickListener : View.OnClickListener = object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 val searchIntent = Intent(this@MainActivity, SearchActivity::class.java)
@@ -29,13 +29,13 @@ class MainActivity : AppCompatActivity() {
         }
         btnSearch.setOnClickListener(btnSearchOnClickListener)
 
-        val btnMedia = findViewById<Button>(R.id.btn_media)
+        val btnMedia = findViewById<Button>(R.id.btnMedia)
         btnMedia.setOnClickListener {
             val mediaIntent = Intent(this, MediaActivity::class.java)
             startActivity(mediaIntent)
         }
 
-        val btnSettings = findViewById<Button>(R.id.btn_settings)
+        val btnSettings = findViewById<Button>(R.id.btnSettings)
         btnSettings.setOnClickListener {
             val searchIntent = Intent(this, SettingsActivity::class.java)
             startActivity(searchIntent)
