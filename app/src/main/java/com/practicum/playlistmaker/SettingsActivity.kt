@@ -1,6 +1,9 @@
 package com.practicum.playlistmaker
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
@@ -18,9 +21,37 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
-        val buttonBack = findViewById<ImageView>(R.id.btn_settings_back)
+        val buttonBack = findViewById<ImageView>(R.id.btnSettingsBack)
         buttonBack.setOnClickListener {
             finish()
+        }
+
+        val frameSharingTo = findViewById<FrameLayout>(R.id.btnSharingTo)
+        frameSharingTo.setOnClickListener {
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message))
+            }
+            startActivity(Intent.createChooser(shareIntent, getString(R.string.choose_messenger)))
+        }
+
+        val frameWriteSupport = findViewById<FrameLayout>(R.id.btnWriteSupport)
+        frameWriteSupport.setOnClickListener {
+            val writeSupportIntent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")).apply {
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.write_support_address)))
+                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.write_support_subject))
+                putExtra(Intent.EXTRA_TEXT, getString(R.string.write_support_message))
+            }
+            startActivity(writeSupportIntent)
+        }
+
+        val frameUserAgreement = findViewById<FrameLayout>(R.id.btnUserAgreement)
+        frameUserAgreement.setOnClickListener {
+            val userAgreementIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(getString(R.string.user_agreement_link))
+            )
+            startActivity(userAgreementIntent)
         }
     }
 }
