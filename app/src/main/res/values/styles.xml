@@ -100,4 +100,43 @@
     <style name="SearchEditText" parent="SearchEditTextCommon">
         <item name="android:textColorHint">@color/yp_text_gray</item>
     </style>
+    <style name="ItemViewImage">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_marginStart">13dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="ItemViewTitleCommon">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">19dp</item>
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:fontFamily">@font/ys_display_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="ItemViewTitle" parent="ItemViewTitleCommon">
+        <item name="android:textColor">@color/yp_black</item>
+    </style>
+    <style name="ItemViewInfoCommon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/ys_display_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="ItemViewInfo" parent="ItemViewInfoCommon">
+        <item name="android:textColor">@color/yp_text_gray</item>
+    </style>
+    <style name="RvTrack">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
+        <item name="android:orientation">vertical</item>
+    </style>
 </resources>

@@ -15,4 +15,10 @@
     <style name="SearchEditText" parent="SearchEditTextCommon">
         <item name="android:textColorHint">@color/yp_black</item>
     </style>
+    <style name="ItemViewTitle" parent="ItemViewTitleCommon">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="ItemViewInfo" parent="ItemViewInfoCommon">
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>
