@@ -6,4 +6,7 @@
     <color name="black">#000000</color>
     <color name="yp_lightgray">#E6E8EB</color>
     <color name="yp_text_gray">#AEAFB4</color>
+    <color name="yp_black__white">@color/yp_black</color>
+    <color name="yp_text_gray__yp_black">@color/yp_text_gray</color>
+    <color name="yp_text_gray__white">@color/yp_text_gray</color>
 </resources>
