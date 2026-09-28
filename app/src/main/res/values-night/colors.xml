@@ -3,4 +3,5 @@
     <color name="yp_black__white">@color/white</color>
     <color name="yp_text_gray__yp_black">@color/yp_black</color>
     <color name="yp_text_gray__white">@color/white</color>
+    <color name="white__yp_black">@color/yp_black</color>
 </resources>
