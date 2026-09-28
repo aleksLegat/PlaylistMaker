@@ -45,7 +45,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var placeholderTextView : TextView
     private lateinit var placeholderButton : Button
 
-
+    private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
     private val songsList = arrayListOf<Track>()
     private val tracksAdapter = TracksAdapter(songsList)
 
@@ -78,6 +78,7 @@ class SearchActivity : AppCompatActivity() {
         clearIcon.setOnClickListener {
             songsList.clear()
             tracksAdapter.notifyDataSetChanged()
+            placeholder.isVisible = false
             searchEditText.setText("")
             searchEditText.clearFocus()
             inputMethodManager?.hideSoftInputFromWindow(searchEditText.windowToken, 0)
@@ -139,27 +140,25 @@ class SearchActivity : AppCompatActivity() {
         iTunesApiService.searchSong("song", textToSearch)
             .enqueue(object : Callback<TracksResponse> {
                 override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
-                    when (response.code()) {
-                        200 -> {
-                            if (response.body()?.results.isNullOrEmpty()) {
-                                showMessage(false)
-                            } else {
-                                for (tr in response.body()?.results!!) {
-                                    songsList.add(
-                                        Track(
-                                            tr.trackName,
-                                            tr.artistName,
-                                            SimpleDateFormat("mm:ss", Locale.getDefault()).format(tr.trackTimeMillis),
-                                            tr.artworkUrl100
-                                        )
+                    if (response.isSuccessful) {
+                        val results = response.body()?.results
+                        if (results.isNullOrEmpty()) {
+                            showMessage(false)
+                        } else {
+                            for (tr in results) {
+                                songsList.add(
+                                    Track(
+                                        tr.trackName,
+                                        tr.artistName,
+                                        dateFormat.format(tr.trackTimeMillis),
+                                        tr.artworkUrl100
                                     )
-                                    tracksAdapter.notifyItemInserted(songsList.size - 1)
-                                }
+                                )
+                                tracksAdapter.notifyItemInserted(songsList.size - 1)
                             }
                         }
-                        else -> {
-                            showMessage(true)
-                        }
+                    } else {
+                        showMessage(true)
                     }
                 }
 
