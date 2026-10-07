@@ -207,8 +207,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun addTrackToHistory(track: Track) {
-        Prefs.tracksHistory = listOf(track) + Prefs.tracksHistory.filterNot { it.trackId == track.trackId }
-            .take(HISTORY_SIZE)
+        val newHistory = listOf(track) + Prefs.tracksHistory.filterNot { it.trackId == track.trackId }
+        Prefs.tracksHistory = newHistory.take(HISTORY_SIZE)
     }
 
     private fun showHistory() {
