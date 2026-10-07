@@ -44,10 +44,18 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var placeholderImageView : ImageView
     private lateinit var placeholderTextView : TextView
     private lateinit var placeholderButton : Button
+    private lateinit var llHistory : LinearLayout
+    private lateinit var rvHistory : RecyclerView
+    private lateinit var btnClearHistory : Button
 
     private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
     private val songsList = arrayListOf<Track>()
-    private val tracksAdapter = TracksAdapter(songsList)
+    private val tracksAdapter = TracksAdapter(songsList) { track ->
+        addTrackToHistory(track)
+    }
+
+    private val historyList = arrayListOf<Track>()
+    private val historyAdapter = HistoryAdapter(historyList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,12 +75,21 @@ class SearchActivity : AppCompatActivity() {
         placeholderImageView = findViewById(R.id.placeholderImageView)
         placeholderTextView = findViewById(R.id.placeholderTextView)
         placeholderButton = findViewById(R.id.placeholderButton)
+        llHistory = findViewById(R.id.llHistory)
+        rvHistory = findViewById(R.id.rvHistory)
+        btnClearHistory = findViewById(R.id.btnClearHistory)
 
         val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
         rvItemView.adapter = tracksAdapter
 
         btnBack.setOnClickListener {
             finish()
+        }
+
+        rvHistory.adapter = historyAdapter
+        btnClearHistory.setOnClickListener {
+            Prefs.tracksHistory = emptyList()
+            showHistory()
         }
 
         clearIcon.setOnClickListener {
@@ -89,6 +106,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 clearIcon.isVisible = !s.isNullOrEmpty()
                 saveEnteredText(s)
+                showHistory()
             }
             override fun afterTextChanged(s: Editable?) { }
         })
@@ -107,6 +125,10 @@ class SearchActivity : AppCompatActivity() {
             handled
         }
 
+        searchEditText.setOnFocusChangeListener { _, _ ->
+            showHistory()
+        }
+
         placeholderButton.setOnClickListener {
             if (!searchEditText.text.isNullOrEmpty()) {
                 searchSong(searchEditText.text.toString())
@@ -122,6 +144,7 @@ class SearchActivity : AppCompatActivity() {
 
     companion object {
         const val ENTERED_TEXT = "ENTERED_TEXT"
+        const val HISTORY_SIZE = 10
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -148,6 +171,7 @@ class SearchActivity : AppCompatActivity() {
                             for (tr in results) {
                                 songsList.add(
                                     Track(
+                                        tr.trackId,
                                         tr.trackName,
                                         tr.artistName,
                                         dateFormat.format(tr.trackTimeMillis),
@@ -180,5 +204,24 @@ class SearchActivity : AppCompatActivity() {
             placeholderButton.isVisible = false
         }
         placeholder.isVisible = true
+    }
+
+    private fun addTrackToHistory(track: Track) {
+        Prefs.tracksHistory = listOf(track) + Prefs.tracksHistory.filterNot { it.trackId == track.trackId }
+            .take(HISTORY_SIZE)
+    }
+
+    private fun showHistory() {
+        val isActive = searchEditText.hasFocus() && searchEditText.text.isEmpty()
+        if (!isActive) {
+            llHistory.isVisible = false
+            return
+        }
+
+        historyList.clear()
+        historyList.addAll(Prefs.tracksHistory)
+        historyAdapter.notifyDataSetChanged()
+
+        llHistory.isVisible = historyList.isNotEmpty()
     }
 }

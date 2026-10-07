@@ -27,7 +27,8 @@
             style="@style/TextViewMenu"
             android:text="@string/dark_theme"/>
 
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/themeSwitcher"
             style="@style/ImageViewMenu"
             tools:ignore="UseSwitchCompatOrMaterialXml"/>
 
