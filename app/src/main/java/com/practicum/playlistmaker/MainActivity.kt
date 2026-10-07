@@ -3,13 +3,13 @@ package com.practicum.playlistmaker
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,13 +21,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         val btnSearch = findViewById<Button>(R.id.btnSearch)
-        val btnSearchOnClickListener : View.OnClickListener = object : View.OnClickListener {
-            override fun onClick(p0: View?) {
-                val searchIntent = Intent(this@MainActivity, SearchActivity::class.java)
-                startActivity(searchIntent)
-            }
+        btnSearch.setOnClickListener {
+            val searchIntent = Intent(this, SearchActivity::class.java)
+            startActivity(searchIntent)
         }
-        btnSearch.setOnClickListener(btnSearchOnClickListener)
 
         val btnMedia = findViewById<Button>(R.id.btnMedia)
         btnMedia.setOnClickListener {
