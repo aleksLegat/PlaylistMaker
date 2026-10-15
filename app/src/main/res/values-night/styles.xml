@@ -21,4 +21,11 @@
     <style name="ItemViewInfo" parent="ItemViewInfoCommon">
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="textYouLookingFor" parent="textYouLookingForCommon">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="buttonYouLookingFor" parent="buttonYouLookingForCommon">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/yp_black</item>
+    </style>
 </resources>

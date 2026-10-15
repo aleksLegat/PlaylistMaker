@@ -32,4 +32,6 @@ class ItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             dp,
             view.context.resources.displayMetrics).toInt()
     }
+
+
 }
