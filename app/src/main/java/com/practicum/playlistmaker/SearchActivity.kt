@@ -1,5 +1,6 @@
 package com.practicum.playlistmaker
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.google.gson.Gson
 import retrofit2.Callback
 import retrofit2.Call
 import retrofit2.Response
@@ -52,10 +54,20 @@ class SearchActivity : AppCompatActivity() {
     private val songsList = arrayListOf<Track>()
     private val tracksAdapter = TracksAdapter(songsList) { track ->
         addTrackToHistory(track)
+        val intent = Intent(this@SearchActivity, AudioplayerActivity::class.java).apply {
+            putExtra(AudioplayerActivity.EXTRA_TRACK, Gson().toJson(track))
+        }
+        startActivity(intent)
     }
 
     private val historyList = arrayListOf<Track>()
-    private val historyAdapter = HistoryAdapter(historyList)
+//    private val historyAdapter = HistoryAdapter(historyList)
+    private val historyAdapter = TracksAdapter(historyList) { track ->
+        val intent = Intent(this@SearchActivity, AudioplayerActivity::class.java).apply {
+            putExtra(AudioplayerActivity.EXTRA_TRACK, Gson().toJson(track))
+        }
+        startActivity(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -175,7 +187,11 @@ class SearchActivity : AppCompatActivity() {
                                         tr.trackName,
                                         tr.artistName,
                                         dateFormat.format(tr.trackTimeMillis),
-                                        tr.artworkUrl100
+                                        tr.artworkUrl100,
+                                        tr.collectionName,
+                                        tr.releaseDate,
+                                        tr.primaryGenreName,
+                                        tr.country
                                     )
                                 )
                                 tracksAdapter.notifyItemInserted(songsList.size - 1)

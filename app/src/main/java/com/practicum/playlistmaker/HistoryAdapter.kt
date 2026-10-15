@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class HistoryAdapter(
-    private val tracks: List<Track>
+    private val tracks: List<Track>,
+    private val onItemClick: (Track) -> Unit
 ) : RecyclerView.Adapter<ItemsViewHolder> ()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewTypr: Int): ItemsViewHolder {
@@ -14,7 +15,11 @@ class HistoryAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
-        holder.bind(tracks[position])
+        val track = tracks[position]
+        holder.bind(track)
+        holder.itemView.setOnClickListener {
+            onItemClick(track)
+        }
     }
 
     override fun getItemCount(): Int = tracks.size
