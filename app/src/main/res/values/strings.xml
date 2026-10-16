@@ -19,4 +19,13 @@
     <string name="connection_problem">Проблемы со связью\n\nЗагрузка не удалась. Проверьте\nподключение к интернету</string>
     <string name="you_looking_for">Вы искали</string>
     <string name="clear_history">Очистить историю</string>
+    <string name="trackLength">Длительность</string>
+    <string name="trackAlbum">Альбом</string>
+    <string name="trackYear">Год</string>
+    <string name="trackGenre">Жанр</string>
+    <string name="trackCountry">Страна</string>
+    <string name="placeholder">Обложка</string>
+    <string name="play">Играть</string>
+    <string name="add_track">Добавить в плейлист</string>
+    <string name="add_favorite">Добавить в избранное</string>
 </resources>
