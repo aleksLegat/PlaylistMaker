@@ -183,5 +183,50 @@
         <item name="android:backgroundTint">@color/yp_black</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="playerTrackName">
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/yp_black__white</item>
+        <item name="maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="playerArtistName">
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/yp_black__white</item>
+        <item name="maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="playTime" parent="playerArtistName">
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="trackDescription">
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/yp_black__white</item>
+        <item name="maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingTop">9dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="trackDescriptionName" parent="trackDescription">
+        <item name="android:textColor">@color/yp_text_gray</item>
+        <item name="android:paddingStart">16dp</item>
+    </style>
+
+    <style name="trackDescriptionValue" parent="trackDescription">
+        <item name="android:textColor">@color/yp_black__white</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
 
 </resources>
