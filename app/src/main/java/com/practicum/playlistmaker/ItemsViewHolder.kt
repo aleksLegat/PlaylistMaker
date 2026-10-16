@@ -25,13 +25,4 @@ class ItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .transform(RoundedCorners(dpToPx(2.0f, itemView)))
             .into(artworkView)
     }
-
-    private fun dpToPx(dp: Float, view: View) : Int {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            view.context.resources.displayMetrics).toInt()
-    }
-
-
 }

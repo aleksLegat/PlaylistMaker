@@ -54,8 +54,8 @@ class SearchActivity : AppCompatActivity() {
     private val songsList = arrayListOf<Track>()
     private val tracksAdapter = TracksAdapter(songsList) { track ->
         addTrackToHistory(track)
-        val intent = Intent(this@SearchActivity, AudioplayerActivity::class.java).apply {
-            putExtra(AudioplayerActivity.EXTRA_TRACK, Gson().toJson(track))
+        val intent = Intent(this@SearchActivity, AudioPlayerActivity::class.java).apply {
+            putExtra(AudioPlayerActivity.EXTRA_TRACK, Gson().toJson(track))
         }
         startActivity(intent)
     }
@@ -63,8 +63,8 @@ class SearchActivity : AppCompatActivity() {
     private val historyList = arrayListOf<Track>()
 //    private val historyAdapter = HistoryAdapter(historyList)
     private val historyAdapter = TracksAdapter(historyList) { track ->
-        val intent = Intent(this@SearchActivity, AudioplayerActivity::class.java).apply {
-            putExtra(AudioplayerActivity.EXTRA_TRACK, Gson().toJson(track))
+        val intent = Intent(this@SearchActivity, AudioPlayerActivity::class.java).apply {
+            putExtra(AudioPlayerActivity.EXTRA_TRACK, Gson().toJson(track))
         }
         startActivity(intent)
     }
