@@ -23,8 +23,6 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class SearchActivity : AppCompatActivity() {
 
@@ -49,8 +47,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var llHistory : LinearLayout
     private lateinit var rvHistory : RecyclerView
     private lateinit var btnClearHistory : Button
-
-    private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
     private val songsList = arrayListOf<Track>()
     private val tracksAdapter = TracksAdapter(songsList) { track ->
         addTrackToHistory(track)
@@ -61,7 +57,6 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private val historyList = arrayListOf<Track>()
-//    private val historyAdapter = HistoryAdapter(historyList)
     private val historyAdapter = TracksAdapter(historyList) { track ->
         val intent = Intent(this@SearchActivity, AudioPlayerActivity::class.java).apply {
             putExtra(AudioPlayerActivity.EXTRA_TRACK, Gson().toJson(track))
@@ -186,8 +181,8 @@ class SearchActivity : AppCompatActivity() {
                                         tr.trackId,
                                         tr.trackName,
                                         tr.artistName,
-                                        dateFormat.format(tr.trackTimeMillis),
-                                        tr.artworkUrl100,
+                                        tr.trackTimeMillis,
+                                        tr.artworkUrl,
                                         tr.collectionName,
                                         tr.releaseDate,
                                         tr.primaryGenreName,

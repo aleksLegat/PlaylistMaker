@@ -1,9 +1,6 @@
 package com.practicum.playlistmaker
 
-import android.media.Image
 import android.os.Bundle
-import android.view.View
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,11 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.gson.Gson
-import com.practicum.playlistmaker.SearchActivity.Companion.ENTERED_TEXT
 
 class AudioPlayerActivity : AppCompatActivity() {
 
@@ -79,27 +74,29 @@ class AudioPlayerActivity : AppCompatActivity() {
             val track: Track = gson.fromJson(data, Track::class.java) ?: return false
 
             Glide.with(this)
-                .load(track.getCoverArtwork())
+                .load(track.coverArtwork)
                 .centerCrop()
                 .placeholder(R.drawable.placeholder_312)
+                .error(R.drawable.placeholder_312)
                 .transform(RoundedCorners(dpToPx(8.0f, trackImage)))
                 .into(trackImage)
 
             trackName.text = track.trackName
             trackArtist.text = track.artistName
-            valueLength.text = track.trackTime
-            valueGenre.text = track.primaryGenreName
-            valueCountry.text = track.country
-            collectionName.visibility = if (track.collectionName.isBlank()) {
+            valueLength.text = track.durationInString
+            valueGenre.text = track.primaryGenreName ?: "-"
+            valueCountry.text = track.country ?: "-"
+
+            collectionName.visibility = if (track.collectionName.isNullOrBlank()) {
                 android.view.View.GONE
             } else {
                 valueAlbum.text = track.collectionName
                 android.view.View.VISIBLE
             }
-            releaseDate.visibility = if (track.releaseDate.isBlank() || track.releaseDate.length < 4) {
+            releaseDate.visibility = if (track.releaseYear.isNullOrBlank()) {
                 android.view.View.GONE
             } else {
-                valueYear.text = track.releaseDate.substring(0, 4)
+                valueYear.text = track.releaseYear
                 android.view.View.VISIBLE
             }
             return true
