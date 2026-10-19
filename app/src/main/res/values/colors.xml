@@ -10,4 +10,5 @@
     <color name="yp_text_gray__yp_black">@color/yp_text_gray</color>
     <color name="yp_text_gray__white">@color/yp_text_gray</color>
     <color name="white__yp_black">@color/white</color>
+    <color name="small_button">#1A1B22</color>
 </resources>
